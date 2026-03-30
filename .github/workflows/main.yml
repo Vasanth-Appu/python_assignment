@@ -20,8 +20,8 @@ jobs:
       - name: Build and start
         run: docker compose up -d --build
 
-      - name: Wait
-        run: timeout /t 10
+      - name: Wait for app
+        run: Start-Sleep -Seconds 10
 
       - name: Run tests
         run: docker exec flaskapp pytest
