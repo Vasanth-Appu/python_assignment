@@ -9,17 +9,19 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+
+      - name: Debug
+        run: dir
 
       - name: Stop old containers
-        run: docker-compose down
+        run: docker compose down
 
-      - name: Build and Start containers
-        run: docker-compose up -d --build
+      - name: Build and start
+        run: docker compose up -d --build
 
-      - name: Wait for app
-        run: sleep 10
+      - name: Wait
+        run: timeout /t 10
 
-      - name: Run Tests inside container
+      - name: Run tests
         run: docker exec flaskapp pytest
