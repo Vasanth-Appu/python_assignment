@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     stages {
+
         stage('Check Python') {
             steps {
                 sh 'python3 --version'
@@ -22,7 +23,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                sh './venv/bin/pytest'
+                sh 'PYTHONPATH=. ./venv/bin/pytest -v'
             }
         }
     }
@@ -33,6 +34,9 @@ pipeline {
         }
         failure {
             echo 'Pipeline failed!'
+        }
+        always {
+            echo 'Build completed'
         }
     }
 }
