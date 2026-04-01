@@ -8,15 +8,21 @@ pipeline {
             }
         }
 
+        stage('Create Virtual Env') {
+            steps {
+                sh 'python3 -m venv venv'
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
-                sh 'pip3 install -r requirements.txt'
+                sh './venv/bin/pip install -r requirements.txt'
             }
         }
 
         stage('Run App') {
             steps {
-                sh 'python3 app.py'
+                sh './venv/bin/python app.py'
             }
         }
     }
