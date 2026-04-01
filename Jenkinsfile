@@ -15,6 +15,13 @@ pipeline {
             }
         }
 
+        stage('Debug Path') {
+    steps {
+        bat "where python"
+        bat "echo %PATH%"
+    }
+}
+
         stage('Run App') {
             steps {
                 bat "python app.py"
