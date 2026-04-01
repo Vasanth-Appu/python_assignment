@@ -5,25 +5,19 @@ pipeline {
 
         stage('Check Python') {
             steps {
-                bat "python --version"
+                bat "C:\\Users\\Vasanth\\AppData\\Local\\Programs\\Python\\Python311\\python.exe --version"
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat "pip install -r requirements.txt"
-            }
-        }
-
-        stage('Debug Path') {
-            steps {
-                bat "where python"
+                bat "C:\\Users\\Vasanth\\AppData\\Local\\Programs\\Python\\Python311\\python.exe -m pip install -r requirements.txt"
             }
         }
 
         stage('Run App') {
             steps {
-                bat "python app.py"
+                bat "C:\\Users\\Vasanth\\AppData\\Local\\Programs\\Python\\Python311\\python.exe app.py"
             }
         }
 
