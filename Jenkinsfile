@@ -2,22 +2,21 @@ pipeline {
     agent any
 
     stages {
-
         stage('Check Python') {
             steps {
-                bat 'python --version'
+                sh 'python3 --version'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat 'python -m pip install -r requirements.txt'
+                sh 'pip3 install -r requirements.txt'
             }
         }
 
         stage('Run App') {
             steps {
-                bat 'python app.py'
+                sh 'python3 app.py'
             }
         }
     }
