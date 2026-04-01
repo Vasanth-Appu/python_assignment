@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        PYTHONPATH = "${WORKSPACE}"
+    }
+
     stages {
 
         stage('Check Python') {
@@ -16,11 +20,11 @@ pipeline {
         }
 
         stage('Debug Path') {
-    steps {
-        bat "where python"
-        bat "echo %PATH%"
-    }
-}
+            steps {
+                bat "where python"
+                bat "echo %PYTHONPATH%"
+            }
+        }
 
         stage('Run App') {
             steps {
@@ -31,11 +35,11 @@ pipeline {
     }
 
     post {
-        failure {
-            echo 'Pipeline failed!'
-        }
         success {
             echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
         }
     }
 }
