@@ -20,9 +20,9 @@ pipeline {
             }
         }
 
-        stage('Run App') {
+        stage('Run Tests') {
             steps {
-                sh './venv/bin/python app.py'
+                sh './venv/bin/pytest'
             }
         }
     }
