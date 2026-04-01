@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        PYTHONPATH = "${WORKSPACE}"
-    }
-
     stages {
 
         stage('Check Python') {
@@ -22,7 +18,6 @@ pipeline {
         stage('Debug Path') {
             steps {
                 bat "where python"
-                bat "echo %PYTHONPATH%"
             }
         }
 
@@ -43,3 +38,27 @@ pipeline {
         }
     }
 }
+```
+
+---
+
+## What to Do Now
+
+1. Open your repo on GitHub
+2. Edit the `Jenkinsfile`
+3. **Delete everything** and paste the above
+4. Commit with message like `"remove environment block"`
+5. Re-run the Jenkins pipeline
+
+---
+
+## How to Confirm It's Fixed
+
+Once the pipeline runs, the log should show:
+```
+[Pipeline] withEnv       ← only ONE withEnv now
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Check Python)
+[Pipeline] bat
+Python 3.x.x           ← actual output appears
