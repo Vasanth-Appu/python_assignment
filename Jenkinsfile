@@ -26,11 +26,31 @@ pipeline {
                 sh 'PYTHONPATH=. ./venv/bin/pytest -v'
             }
         }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t flaskapp:latest .'
+            }
+        }
+
+        stage('Deploy Application') {
+            steps {
+                sh '''
+                    docker stop flaskapp || true
+                    docker rm flaskapp || true
+                    docker run -d \
+                      --name flaskapp \
+                      --network python_assignment_default \
+                      -p 80:5000 \
+                      flaskapp:latest
+                '''
+            }
+        }
     }
 
     post {
         success {
-            echo 'Pipeline succeeded!'
+            echo 'Pipeline succeeded and deployed successfully!'
         }
         failure {
             echo 'Pipeline failed!'
